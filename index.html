@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>لوحة قيادة تثبيت استقرار NetSuite — CAAPP</title>
+<style>
+:root{--bg:#f4f6fa;--card:#fff;--ink:#0e1a2b;--mut:#5a6a80;--line:#e3e8ef;--track:#e6ebf2;--c0:#2f6db5;--c1:#2a9d8f;--c2:#e0a030;--bad:#c0392b;--good:#1e8e5a;--warn:#b7791f;--hi:#eaf2fc;--hero1:#0f2744;--hero2:#1d4e89;--shadow:0 1px 2px rgba(15,39,68,.06),0 4px 14px rgba(15,39,68,.05)}
+@media (prefers-color-scheme:dark){:root{--bg:#0c1522;--card:#14202f;--ink:#e8eef6;--mut:#93a4ba;--line:#243448;--track:#243448;--c0:#5b9be6;--c1:#3fc0b0;--c2:#f0b84a;--bad:#ef6b5b;--good:#46c28a;--warn:#e3b04d;--hi:#1b2d44;--hero1:#0a1a30;--hero2:#16365f;--shadow:none}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI","Noto Sans Arabic",Tahoma,Arial,sans-serif;font-size:14px;line-height:1.55}
+.hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;padding:26px 20px 22px}
+.hero .in{max-width:1280px;margin:auto}
+.hero h1{margin:0 0 6px;font-size:26px;font-weight:700}
+.hero p{margin:0;opacity:.88}
+.stamp{display:inline-block;margin-top:12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 14px;font-size:13px}
+nav{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav .in{max-width:1280px;margin:auto;padding:8px 16px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--ink);text-decoration:none;font-size:13px;padding:4px 11px;border-radius:999px;background:var(--hi)}
+nav a:hover{background:var(--c0);color:#fff}
+main{max-width:1280px;margin:0 auto;padding:18px 16px 60px}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 20px;margin:16px 0}
+section h2{margin:0 0 12px;font-size:19px;font-weight:700;display:flex;align-items:center;gap:10px}
+section h2:before{content:"";width:5px;height:20px;border-radius:3px;background:var(--c0)}
+section h3{margin:18px 0 8px;font-size:15px}
+.note{color:var(--mut);font-size:13px;margin:6px 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin:10px 0 14px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:linear-gradient(180deg,var(--hi),var(--card))}
+.kpi .v{font-size:30px;font-weight:700;line-height:1.1}
+.kpi .l{font-size:13px;font-weight:600;margin-top:4px}
+.kpi .d{font-size:12px;color:var(--mut);margin-top:2px}
+.kpi.bad .v{color:var(--bad)}
+.callout{border-inline-start:5px solid var(--c2);background:var(--hi);border-radius:8px;padding:10px 14px;margin:10px 0}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(380px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card h4{margin:0 0 8px;font-size:13px;color:var(--mut);font-weight:600}
+.donut{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.legend{font-size:13px}
+.legend div{display:flex;align-items:center;gap:7px;margin:3px 0}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:8px 0}
+.ctl label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:3px}
+select,input[type=text]{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 9px;min-width:150px}
+button{font:inherit;cursor:pointer;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
+button:hover{background:var(--hi)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{border:0;border-radius:0;background:var(--card)}
+.seg button.on{background:var(--c0);color:#fff}
+.seg button .n{opacity:.7;font-size:11px;margin-inline-start:4px}
+.tblw{overflow:auto;border:1px solid var(--line);border-radius:10px;max-height:640px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+th{position:sticky;top:0;background:var(--hi);font-weight:600;white-space:nowrap;z-index:1}
+td.n,th.n{text-align:end;white-space:nowrap}
+tr:hover td{background:var(--hi)}
+.pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill.good{background:rgba(30,142,90,.14);color:var(--good)}
+.pill.warn{background:rgba(224,160,48,.18);color:var(--warn)}
+.pill.bad{background:rgba(192,57,43,.14);color:var(--bad)}
+.pill.neutral{background:var(--track);color:var(--mut)}
+.tbad{color:var(--bad);font-weight:600}.tgood{color:var(--good);font-weight:600}
+.props{display:grid;grid-template-columns:minmax(120px,200px) 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:10px 0}
+.props div{padding:7px 12px;border-bottom:1px solid var(--line)}
+.props .k{background:var(--hi);color:var(--mut);font-weight:600}
+svg{max-width:100%;height:auto;display:block}
+svg text{font-family:inherit}
+.svgw{direction:ltr}
+.rt{unicode-bidi:plaintext}
+.tip{position:fixed;z-index:50;pointer-events:none;background:#0e1a2b;color:#fff;border-radius:8px;padding:7px 11px;font-size:12.5px;max-width:420px;box-shadow:0 6px 20px rgba(0,0,0,.3);display:none;direction:rtl}
+.hv{min-height:22px;color:var(--mut);font-size:13px;margin:4px 0}
+ul.dq{margin:0;padding-inline-start:20px}ul.dq li{margin:4px 0}
+.dec{display:grid;grid-template-columns:auto 1fr auto;gap:10px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;align-items:start}
+.dec .id{font-weight:700;color:var(--c0)}
+.dec .t{font-weight:600}.dec .m{color:var(--mut);font-size:12px;margin-top:2px}
+footer{max-width:1280px;margin:0 auto;padding:0 16px 30px;color:var(--mut);font-size:12px}
+.hot{cursor:pointer}
+.err{padding:30px;text-align:center;color:var(--bad)}
+</style>
+</head>
+<body>
+<div class="hero"><div class="in">
+<h1>لوحة قيادة تثبيت استقرار نظام Oracle NetSuite — CAAPP</h1>
+<p id="sub">جارٍ التحميل…</p>
+<span class="stamp" id="stamp"></span>
+</div></div>
+<nav><div class="in" id="nav"></div></nav>
+<main>
+<section id="sum"><h2>ملخص تنفيذي</h2><div id="sumb"></div></section>
+<section id="dates"><h2>المواعيد الرئيسية</h2><div id="datesb"></div></section>
+<section id="filters"><h2>التصفية</h2><div id="filtersb"></div></section>
+<section id="wp"><h2>التقدم حسب حزمة العمل</h2><div id="wpb"></div></section>
+<section id="gantt"><h2>الجدول الزمني</h2><div id="ganttb"></div></section>
+<section id="owners"><h2>المسؤولون والإدارات</h2><div id="ownersb"></div></section>
+<section id="dept"><h2>بطاقة أداء الإدارات (WP03)</h2><div id="deptb"></div></section>
+<section id="flow"><h2>الاعتماديات والتدفق</h2><div id="flowb"></div></section>
+<section id="tasks"><h2>جدول المهام</h2><div id="tasksb"></div></section>
+<section id="changed"><h2>ما تغيّر اليوم</h2><div id="changedb"></div></section>
+<section id="risks"><h2>المخاطر</h2><div id="risksb"></div></section>
+<section id="decisions"><h2>قرارات بانتظار أحمد</h2><div id="decisionsb"></div></section>
+<section id="dq"><h2>جودة البيانات وملاحظات الملف</h2><div id="dqb"></div></section>
+<section id="src"><h2>المصدر والتحديث</h2><div id="srcb"></div></section>
+</main>
+<footer>صفحة ثابتة بلا تسجيل دخول ولا اتصال بأي نظام؛ كل الأرقام محسوبة من ملف قائمة الأنشطة (data.json). التقديرات مُعلَّمة بأنها تقديرات.</footer>
+<div class="tip" id="tip"></div>
+<script>
+"use strict";
+(async function () {
+var D;
+try { D = await (await fetch("data.json?v=" + Date.now(), { cache: "no-store" })).json(); }
+catch (e) { document.getElementById("sub").innerHTML = '<span class="err">تعذّر تحميل data.json</span>'; return; }
+
+var META = D.META, WSN = D.WSN, OUTCOMES = D.OUTCOMES, BEFORE = D.BEFORE, EVID = D.EVID, DEPT = D.DEPT, KEYDATES = D.KEYDATES, RISKS = D.RISKS,
+    DECISIONS = D.DECISIONS, OTHER = D.OTHER, DEP_NODES = D.DEP_NODES, DEP_EDGES = D.DEP_EDGES, DQ = D.DQ, HIST = D.HIST, DELTA = D.DELTA;
+var MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+var WDN = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+var STATUS_AR = { done: "منجز", inprog: "قيد التنفيذ", notstarted: "لم يبدأ" };
+var TIMING_AR = { done: "منجز", overdue: "متأخر", active: "نشط الآن", upcoming: "قادم" };
+var CAT_AR = { confirmed: "أكدت كتابياً", replied: "ردّت بلا تأكيد", partial: "رد جزئي", none: "لا رد", notsent: "الطلب لم يُرسل", internal: "داخلية" };
+var CAT_CLS = { confirmed: "good", replied: "warn", partial: "warn", none: "bad", notsent: "warn", internal: "neutral" };
+var COL = ["var(--c0)", "var(--c1)", "var(--c2)", "#8a97a8"];
+
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+function $(id) { return document.getElementById(id); }
+function dn(s) { var p = s.split("-").map(Number); return Math.round(Date.UTC(p[0], p[1] - 1, p[2]) / 86400000); }
+function fd(s) { return s.slice(8, 10) + "/" + s.slice(5, 7) + "/" + s.slice(0, 4); }
+function fs(s) { return s.slice(8, 10) + "/" + s.slice(5, 7); }
+function wdOf(s) { return WDN[new Date(dn(s) * 86400000).getUTCDay()]; }
+function fp(v) { return (Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1)) + "%"; }
+function sg(v) { return (v >= 0 ? "+" : "") + (Math.abs(v - Math.round(v)) < 0.05 ? String(Math.round(v)) : v.toFixed(1)); }
+function cut(s, n) { return s.length > n ? s.slice(0, n - 1) + "…" : s; }
+function wpKey(s) { return (s.match(/\d+/g) || []).map(function (n) { return ("000" + n).slice(-3); }).join("."); }
+function uniq(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+var ASOF = dn(META.asOf);
+
+var IT = D.ACT.map(function (r) {
+  var days = dn(r[9]) - dn(r[8]) + 1, left = dn(r[9]) - ASOF, pct = r[10];
+  var status = pct >= 100 ? "done" : pct > 0 ? "inprog" : "notstarted";
+  var timing = pct >= 100 ? "done" : left < 0 ? "overdue" : dn(r[8]) <= ASOF ? "active" : "upcoming";
+  return { id: r[0], ws: r[1], wp: r[2], wpName: r[3], en: r[4], ar: r[5], resp: r[6], acct: r[7], start: r[8], end: r[9], pct: pct, outcome: OUTCOMES[r[11]], row: r[12], days: days, left: left, status: status, timing: timing };
+});
+function agg(l) {
+  var n = l.length, sum = 0, dsum = 0, wsum = 0;
+  l.forEach(function (x) { sum += x.pct; dsum += x.days; wsum += x.days * x.pct; });
+  function c(f) { return l.filter(f).length; }
+  return { n: n, simple: n ? sum / n : 0, weighted: dsum ? wsum / dsum : 0,
+    done: c(function (x) { return x.status === "done"; }), inprog: c(function (x) { return x.status === "inprog"; }), notstarted: c(function (x) { return x.status === "notstarted"; }),
+    overdue: c(function (x) { return x.timing === "overdue"; }), active: c(function (x) { return x.timing === "active"; }), upcoming: c(function (x) { return x.timing === "upcoming"; }) };
+}
+function groupBy(l, key) { var m = {}, order = []; l.forEach(function (x) { var k = key(x); if (!m[k]) { m[k] = []; order.push(k); } m[k].push(x); }); return order.map(function (k) { return [k, m[k]]; }); }
+function minOf(l) { return l.reduce(function (a, x) { return x.start < a ? x.start : a; }, "9999-99-99"); }
+function maxOf(l) { return l.reduce(function (a, x) { return x.end > a ? x.end : a; }, "0000-00-00"); }
+function leftTxt(x) { return x.status === "done" ? "—" : x.left >= 0 ? x.left + " يوم" : "متأخر " + (-x.left) + " يوم"; }
+function pill(t, cls) { return '<span class="pill ' + cls + '">' + esc(t) + "</span>"; }
+function props(items) { return '<div class="props">' + items.map(function (i) { return '<div class="k">' + esc(i[0]) + '</div><div>' + (i[2] ? i[1] : esc(i[1])) + "</div>"; }).join("") + "</div>"; }
+function table(cols, rows, nums) { nums = nums || []; return '<div class="tblw"><table><thead><tr>' + cols.map(function (c, i) { return '<th class="' + (nums.indexOf(i) >= 0 ? "n" : "") + '">' + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+  rows.map(function (r) { return "<tr>" + r.map(function (c, i) { var h = typeof c === "object" && c !== null; return '<td class="' + (nums.indexOf(i) >= 0 ? "n" : "") + (h && c.cls ? " " + c.cls : "") + '">' + (h ? (c.html ? c.html : esc(c.t)) : esc(c)) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>"; }
+function seg(id, opts, val) { return '<div class="seg" id="' + id + '">' + opts.map(function (o) { return '<button data-v="' + esc(o.v) + '" class="' + (o.v === val ? "on" : "") + '">' + esc(o.l) + (o.n != null ? '<span class="n">' + o.n + "</span>" : "") + "</button>"; }).join("") + "</div>"; }
+function onSeg(id, fn) { $(id).addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; fn(b.getAttribute("data-v")); Array.prototype.forEach.call($(id).children, function (c) { c.classList.toggle("on", c === b); }); }); }
+function sel(id, label, opts, val) { return '<label>' + esc(label) + '<select id="' + id + '">' + opts.map(function (o) { return '<option value="' + esc(o[0]) + '"' + (o[0] === val ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select></label>"; }
+
+// ---------- tooltip ----------
+var tip = $("tip");
+document.addEventListener("mousemove", function (e) {
+  var t = e.target.closest ? e.target.closest("[data-tip]") : null;
+  if (!t) { tip.style.display = "none"; return; }
+  tip.innerHTML = esc(t.getAttribute("data-tip")).replace(/ \| /g, "<br>");
+  tip.style.display = "block";
+  var x = e.clientX + 14, y = e.clientY + 16, w = tip.offsetWidth, h = tip.offsetHeight;
+  if (x + w > window.innerWidth - 8) x = e.clientX - w - 14;
+  if (y + h > window.innerHeight - 8) y = e.clientY - h - 14;
+  tip.style.left = Math.max(4, x) + "px"; tip.style.top = Math.max(4, y) + "px";
+});
+
+// ---------- svg helpers ----------
+function donut(parts, total) {
+  var R = 52, C = 2 * Math.PI * R, off = 0, segs = "";
+  var sum = parts.reduce(function (a, p) { return a + p.v; }, 0) || 1;
+  parts.forEach(function (p, i) { var len = C * p.v / sum; segs += '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + COL[i % 4] + '" stroke-width="22" stroke-dasharray="' + len + " " + (C - len) + '" stroke-dashoffset="' + (-off) + '" transform="rotate(-90 70 70)" data-tip="' + esc(p.l + ": " + p.v + " (" + Math.round(100 * p.v / sum) + "%)") + '"/>'; off += len; });
+  return '<div class="donut"><svg viewBox="0 0 140 140" width="140" height="140"><circle r="' + R + '" cx="70" cy="70" fill="none" stroke="var(--track)" stroke-width="22"/>' + segs + '<text x="70" y="76" text-anchor="middle" font-size="22" font-weight="700" fill="currentColor">' + total + '</text></svg><div class="legend">' +
+    parts.map(function (p, i) { return '<div><span class="sw" style="background:' + COL[i % 4] + '"></span>' + esc(p.l) + " · <b>" + p.v + "</b></div>"; }).join("") + "</div></div>";
+}
+function hbars(rows, max, fmt) {
+  var H = rows.length * 26 + 6, L = 230, W = 700, bw = W - L - 60;
+  return '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">' + rows.map(function (r, i) {
+    var y = i * 26 + 3;
+    return '<g data-tip="' + esc(r.tip || r.l) + '"><text x="' + (L - 8) + '" y="' + (y + 13) + '" text-anchor="end" font-size="12" fill="currentColor">' + esc(cut(r.l, 34)) + '</text><rect x="' + L + '" y="' + y + '" width="' + bw + '" height="16" rx="4" fill="var(--track)"/><rect x="' + L + '" y="' + y + '" width="' + (r.v > 0 ? Math.max(3, bw * Math.min(r.v, max) / max) : 0) + '" height="16" rx="4" fill="var(--c0)"/><text x="' + (L + bw + 8) + '" y="' + (y + 13) + '" font-size="12" fill="var(--mut)">' + esc(fmt(r.v)) + "</text></g>";
+  }).join("") + "</svg></div>";
+}
+function stacked(rows, series) {
+  var W = 700, L = 230, bw = W - L - 70, H = rows.length * 26 + 30;
+  var mx = Math.max.apply(null, rows.map(function (r) { return r.vals.reduce(function (a, b) { return a + b; }, 0); }).concat([1]));
+  var out = '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">';
+  series.forEach(function (s, i) { out += '<rect x="' + (L + i * 110) + '" y="2" width="10" height="10" rx="2" fill="' + COL[i % 4] + '"/><text x="' + (L + i * 110 + 15) + '" y="11" font-size="11" fill="currentColor">' + esc(s) + "</text>"; });
+  rows.forEach(function (r, i) {
+    var y = 22 + i * 26, x = L;
+    out += '<text x="' + (L - 8) + '" y="' + (y + 13) + '" text-anchor="end" font-size="12" fill="currentColor">' + esc(cut(r.l, 34)) + "</text>";
+    r.vals.forEach(function (v, k) { var w = bw * v / mx; if (v > 0) { out += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="16" fill="' + COL[k % 4] + '" data-tip="' + esc(r.l + " | " + series[k] + ": " + v) + '"/>'; x += w; } });
+    out += '<text x="' + (x + 6) + '" y="' + (y + 13) + '" font-size="12" fill="var(--mut)">' + r.vals.reduce(function (a, b) { return a + b; }, 0) + "</text>";
+  });
+  return out + "</svg></div>";
+}
+function monthTicks(d0, d1) {
+  var out = [], s = new Date(d0 * 86400000), y = s.getUTCFullYear(), m = s.getUTCMonth();
+  out.push([d0, MONTHS[m]]);
+  for (;;) { m++; if (m > 11) { m = 0; y++; } var d = Math.round(Date.UTC(y, m, 1) / 86400000); if (d > d1) break; out.push([d, MONTHS[m] + (m === 0 ? " " + y : "")]); }
+  return out;
+}
+var D0 = dn(minOf(IT)), D1 = dn(maxOf(IT));
+
+// ---------- state ----------
+var S = { ws: "all", own: "all", acc: "all", view: "all", q: "", selWp: "all", scale: "full", gMode: "wp", dim: "resp", catSel: "all", selDept: DEPT[0].name, sortKey: "file", desc: false, cols: "brief", limit: "25", selAct: IT[0].id, selChg: "" };
+var ALL = agg(IT);
+function filtered() {
+  var q = S.q.toLowerCase();
+  return IT.filter(function (x) {
+    return (S.ws === "all" || x.ws === S.ws) && (S.own === "all" || x.resp === S.own) && (S.acc === "all" || x.acct === S.acc) &&
+      (S.view === "all" || (S.view === "inprog" && x.status === "inprog") || (S.view === "notstarted" && x.status === "notstarted") || (S.view === "overdue" && x.timing === "overdue") || (S.view === "upcoming" && x.timing === "upcoming") || (S.view === "active" && x.timing === "active")) &&
+      (q === "" || (x.id + " " + x.en + " " + x.ar + " " + x.resp).toLowerCase().indexOf(q) >= 0);
+  });
+}
+var WP_LIST = uniq(IT.map(function (x) { return x.wp; })).sort(function (a, b) { return wpKey(a) < wpKey(b) ? -1 : 1; });
+function wpName(w) { return IT.filter(function (x) { return x.wp === w; })[0].wpName; }
+
+// ---------- header ----------
+$("sub").textContent = "المصدر: قائمة أنشطة م. محمد خليفة (الأريب PMO) — " + ALL.n + " نشاطاً، آخر تعديل للملف " + META.sourceModified + " (توقيت الرياض).";
+$("stamp").textContent = "آخر تحديث من المصدر: " + META.generatedAt + " (توقيت الرياض)";
+var NAV = [["sum","ملخص تنفيذي"],["dates","المواعيد"],["filters","التصفية"],["wp","حزم العمل"],["gantt","الجدول الزمني"],["owners","المسؤولون"],["dept","الإدارات"],["flow","الاعتماديات"],["tasks","المهام"],["changed","ما تغيّر"],["risks","المخاطر"],["decisions","القرارات"],["dq","جودة البيانات"],["src","المصدر"]];
+$("nav").innerHTML = NAV.map(function (n) { return '<a href="#' + n[0] + '">' + n[1] + "</a>"; }).join("");
+
+// ---------- derived globals ----------
+var changed = IT.filter(function (x) { return BEFORE[x.id] !== undefined && BEFORE[x.id] !== x.pct; });
+var baseSimple = IT.reduce(function (a, x) { return a + (BEFORE[x.id] || 0); }, 0) / IT.length;
+var totDays = IT.reduce(function (a, x) { return a + x.days; }, 0);
+var baseWeighted = IT.reduce(function (a, x) { return a + x.days * (BEFORE[x.id] || 0); }, 0) / totDays;
+var nSoon = IT.filter(function (x) { return x.status !== "done" && x.left >= 0 && x.left <= 3; }).length;
+var nNone = DEPT.filter(function (d) { return d.cat === "none"; }).length;
+var nNotSent = DEPT.filter(function (d) { return d.cat === "notsent"; }).length;
+var nConfirmed = DEPT.filter(function (d) { return d.cat === "confirmed"; }).length;
+
+// ---------- sections ----------
+function renderSum() {
+  var kp = [
+    [fp(ALL.simple), "متوسط الإنجاز (بسيط)", "الأصل 11/11: " + fp(baseSimple) + " · التغيّر " + sg(ALL.simple - baseSimple) + " نقطة", ""],
+    [fp(ALL.weighted), "متوسط الإنجاز (مرجّح بمدة النافذة)", "الأصل 11/11: " + fp(baseWeighted) + " · الوزن تقدير للأهمية", ""],
+    [ALL.n, "عدد الأنشطة", Object.keys(WSN).length + " مسارات · " + WP_LIST.length + " حزمة", ""],
+    [ALL.inprog, "قيد التنفيذ", "من " + ALL.n + " نشاطاً", ""],
+    [ALL.notstarted, "لم يبدأ", "0% في العمود J", ""],
+    [ALL.done, "منجز", "100% فقط", ""],
+    [ALL.overdue, "متأخر حتى " + fd(META.asOf), "نهاية النافذة قبل اليوم", "bad"],
+    [nSoon, "تنتهي خلال 3 أيام", "غير مكتملة", ""]
+  ];
+  var h = '<p>' + ALL.inprog + " نشاطاً قيد التنفيذ من " + ALL.n + "، و" + (ALL.done === 0 ? "لا نشاط منجز بعد" : ALL.done + " منجز") + ". متوسط الإنجاز البسيط " + fp(ALL.simple) + " والمرجّح بمدة النافذة " + fp(ALL.weighted) + ".</p>";
+  h += '<div class="kpis">' + kp.map(function (k) { return '<div class="kpi ' + k[3] + '"><div class="v">' + k[0] + '</div><div class="l">' + esc(k[1]) + '</div><div class="d">' + esc(k[2]) + "</div></div>"; }).join("") + "</div>";
+  h += '<div class="callout"><b>للانتباه:</b> ' + ALL.overdue + " أنشطة متأخرة، و" + nSoon + " تنتهي خلال 3 أيام، و" + nNone + " إدارات لم تردّ على طلب WP03؛ وثلاثة قرارات بانتظار أحمد في قسم القرارات.</div>";
+  h += '<div class="grid g3">' +
+    '<div class="card"><h4>الحالة</h4>' + donut([{ l: "قيد التنفيذ", v: ALL.inprog }, { l: "لم يبدأ", v: ALL.notstarted }, { l: "منجز", v: ALL.done }].filter(function (p) { return p.v > 0; }), ALL.n) + "</div>" +
+    '<div class="card"><h4>التوقيت</h4>' + donut([{ l: "متأخر", v: ALL.overdue }, { l: "نشط الآن", v: ALL.active }, { l: "قادم", v: ALL.upcoming }, { l: "منجز", v: ALL.done }].filter(function (p) { return p.v > 0; }), ALL.n) + "</div>" +
+    '<div class="card"><h4>ردود الإدارات على WP03</h4>' + donut(Object.keys(CAT_AR).map(function (k) { return { l: CAT_AR[k], v: DEPT.filter(function (d) { return d.cat === k; }).length }; }).filter(function (p) { return p.v > 0; }), DEPT.length) + "</div></div>";
+  if (HIST.length >= 3) {
+    var W = 900, H2 = 190, L = 40, mx = Math.max(10, Math.ceil(Math.max.apply(null, HIST.map(function (x) { return Math.max(x.simple, x.weighted); })) / 10) * 10);
+    function X(i) { return L + (W - L - 20) * i / (HIST.length - 1); } function Y(v) { return H2 - 28 - (H2 - 48) * v / mx; }
+    function line(key, c) { return '<polyline fill="none" stroke="' + c + '" stroke-width="2.5" points="' + HIST.map(function (h, i) { return X(i) + "," + Y(h[key]); }).join(" ") + '"/>' + HIST.map(function (h, i) { return '<circle cx="' + X(i) + '" cy="' + Y(h[key]) + '" r="4" fill="' + c + '" data-tip="' + esc(h.label + " | " + (key === "simple" ? "بسيط " : "مرجّح ") + fp(h[key])) + '"/>'; }).join(""); }
+    h += '<h3>مسار الإنجاز عبر التحديثات</h3><div class="svgw"><svg viewBox="0 0 ' + W + " " + H2 + '"><line x1="' + L + '" x2="' + (W - 20) + '" y1="' + Y(0) + '" y2="' + Y(0) + '" stroke="var(--line)"/>' + line("simple", "var(--c0)") + line("weighted", "var(--c1)") +
+      '<text x="' + L + '" y="14" font-size="11" fill="var(--c0)">بسيط</text><text x="' + (L + 40) + '" y="14" font-size="11" fill="var(--c1)">مرجّح</text>' + HIST.map(function (hh, i) { return (i === 0 || i === HIST.length - 1 || i % Math.ceil(HIST.length / 5) === 0) ? '<text x="' + X(i) + '" y="' + (H2 - 8) + '" text-anchor="middle" font-size="11" fill="var(--mut)">' + esc(hh.label) + "</text>" : ""; }).join("") + "</svg></div>";
+  }
+  $("sumb").innerHTML = h;
+}
+
+function renderDates() {
+  var endDates = groupBy(IT.filter(function (x) { return x.status !== "done"; }), function (x) { return x.end; }).sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
+  var emph = Math.max(0, endDates.findIndex(function (g) { return dn(g[0]) >= ASOF; }));
+  var mx = Math.max.apply(null, endDates.map(function (g) { return g[1].length; }));
+  var W = 900, H = 190, L = 30, bw = (W - L - 10) / endDates.length;
+  var ch = '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">' + endDates.map(function (g, i) {
+    var h = (H - 56) * g[1].length / mx, x = L + i * bw + bw * 0.15;
+    return '<rect x="' + x + '" y="' + (H - 30 - h) + '" width="' + bw * 0.7 + '" height="' + h + '" rx="4" fill="' + (i === emph ? "var(--c0)" : dn(g[0]) < ASOF ? "var(--bad)" : "var(--c1)") + '" data-tip="' + esc(fd(g[0]) + " (" + wdOf(g[0]) + ") | " + g[1].length + " نشاط تنتهي نافذتها | متوسط الإنجاز " + fp(agg(g[1]).simple)) + '"/><text x="' + (x + bw * 0.35) + '" y="' + (H - 34 - h) + '" text-anchor="middle" font-size="12" fill="currentColor">' + g[1].length + '</text><text x="' + (x + bw * 0.35) + '" y="' + (H - 12) + '" text-anchor="middle" font-size="11" fill="var(--mut)">' + fs(g[0]) + "</text>";
+  }).join("") + "</svg></div>";
+  var rows = endDates.map(function (g) { var w = uniq(g[1].map(function (x) { return x.wp; })); return { date: g[0], label: "نهاية نافذة " + g[1].length + " نشاط: " + w.slice(0, 4).join("، ") + (w.length > 4 ? "…" : ""), n: g[1].length, avg: agg(g[1]).simple, source: "ملف خليفة" }; })
+    .concat(KEYDATES.map(function (k) { return { date: k.date, label: k.label, n: 0, avg: 0, source: k.source }; }))
+    .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : b.n - a.n; });
+  $("datesb").innerHTML = '<p class="note">أعمدة نهاية النوافذ (الأحمر منتهٍ، الأزرق الأقرب) ثم الجدول بالأيام المتبقية حتى ' + fd(META.asOf) + ".</p>" + ch +
+    table(["التاريخ", "اليوم", "المتبقي", "الحدث", "أنشطة", "المتوسط", "المصدر"], rows.map(function (k) { var d = dn(k.date) - ASOF; return [fd(k.date), wdOf(k.date), d < 0 ? { t: "متأخر " + (-d) + " يوم", cls: "tbad" } : d === 0 ? "اليوم" : d + " يوم", k.label, k.n > 0 ? String(k.n) : "—", k.n > 0 ? fp(k.avg) : "—", k.source]; }), [2, 4, 5]);
+}
+
+function renderFilters() {
+  var wsO = [["all", "كل المسارات"]].concat(Object.keys(WSN).sort().map(function (k) { return [k, k + " · " + WSN[k]]; }));
+  var rO = [["all", "كل المسؤولين"]].concat(uniq(IT.map(function (x) { return x.resp; })).map(function (k) { return [k, k]; }));
+  var aO = [["all", "كل جهات المساءلة"]].concat(uniq(IT.map(function (x) { return x.acct; })).map(function (k) { return [k, k]; }));
+  var vO = [["all", "الكل", ALL.n], ["inprog", "قيد التنفيذ", ALL.inprog], ["notstarted", "لم يبدأ", ALL.notstarted], ["overdue", "متأخر", ALL.overdue], ["active", "نشط الآن", ALL.active], ["upcoming", "قادم", ALL.upcoming]].map(function (o) { return { v: o[0], l: o[1], n: o[2] }; });
+  $("filtersb").innerHTML = '<p class="note">تُطبَّق المرشحات على الأقسام التالية حتى جدول المهام؛ الملخص والمواعيد تبقى على كامل الملف.</p><div class="ctl">' + sel("fWs", "المسار", wsO, S.ws) + sel("fOwn", "المسؤول عن النشاط", rO, S.own) + sel("fAcc", "المساءلة عن الحزمة", aO, S.acc) +
+    '<label>بحث بالاسم أو المعرّف<input type="text" id="fQ" placeholder="مثال: WP03 أو Jira"></label><button id="fReset">إعادة الضبط</button></div><div class="ctl">' + seg("fView", vO, S.view) + '</div><div class="hv" id="fCount"></div>';
+  $("fWs").onchange = function (e) { S.ws = e.target.value; renderFiltered(); };
+  $("fOwn").onchange = function (e) { S.own = e.target.value; renderFiltered(); };
+  $("fAcc").onchange = function (e) { S.acc = e.target.value; renderFiltered(); };
+  $("fQ").oninput = function (e) { S.q = e.target.value; renderFiltered(); };
+  onSeg("fView", function (v) { S.view = v; renderFiltered(); });
+  $("fReset").onclick = function () { S.ws = S.own = S.acc = S.view = "all"; S.q = ""; S.selWp = "all"; renderFilters(); renderFiltered(); };
+}
+
+function wpRowsOf(F) {
+  return groupBy(F, function (x) { return x.wp; }).sort(function (a, b) { return wpKey(a[0]) < wpKey(b[0]) ? -1 : 1; }).map(function (g) {
+    var a = agg(g[1]);
+    return { wp: g[0], name: g[1][0].wpName, pct: a.simple, n: a.n, overdue: a.overdue, start: minOf(g[1]), end: maxOf(g[1]), resp: g[1][0].resp, acct: g[1][0].acct,
+      info: g[0] + " · " + g[1][0].wpName + " | " + a.n + " أنشطة · المتوسط " + fp(a.simple) + " | النافذة " + fd(minOf(g[1])) + " ← " + fd(maxOf(g[1])) + " | متأخرة " + a.overdue + " · المسؤول " + g[1][0].resp };
+  });
+}
+function renderWp(F, T) {
+  if (!F.length) { $("wpb").innerHTML = '<p class="note">لا نتائج مطابقة؛ اضغط إعادة الضبط.</p>'; return; }
+  var rows = wpRowsOf(F), mp = Math.max.apply(null, rows.map(function (r) { return r.pct; }).concat([0]));
+  var max = S.scale === "full" ? 100 : Math.max(10, Math.ceil(mp / 10) * 10);
+  var RH = 26, L = 270, R = 80, W = 1000, H = rows.length * RH + 26, bw = W - L - R;
+  var svg = '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">';
+  [0, .25, .5, .75, 1].forEach(function (t) { svg += '<line x1="' + (L + bw * t) + '" x2="' + (L + bw * t) + '" y1="0" y2="' + (H - 20) + '" stroke="var(--line)"/><text x="' + (L + bw * t) + '" y="' + (H - 6) + '" text-anchor="middle" font-size="11" fill="var(--mut)">' + Math.round(max * t) + "%</text>"; });
+  rows.forEach(function (r, i) {
+    var y = i * RH + 4;
+    svg += '<g class="hot" data-wp="' + r.wp + '" data-tip="' + esc(r.info) + '"><rect x="0" y="' + (y - 4) + '" width="' + W + '" height="' + (RH - 2) + '" rx="4" fill="' + (S.selWp === r.wp ? "var(--hi)" : "transparent") + '"/><text x="' + (L - 10) + '" y="' + (y + 11) + '" text-anchor="end" font-size="12" fill="currentColor">' + esc(cut(r.wp + " · " + r.name, 40)) + '</text><rect x="' + L + '" y="' + y + '" width="' + bw + '" height="14" rx="3" fill="var(--track)"/><rect x="' + L + '" y="' + y + '" width="' + (r.pct > 0 ? Math.max(3, bw * Math.min(r.pct, max) / max) : 0) + '" height="14" rx="3" fill="var(--c0)"/>' +
+      (r.overdue > 0 ? '<rect x="' + (L + bw + 8) + '" y="' + (y + 2) + '" width="10" height="10" rx="2" fill="var(--bad)"/>' : "") + '<text x="' + (L + bw + (r.overdue > 0 ? 24 : 8)) + '" y="' + (y + 11) + '" font-size="12" fill="var(--mut)">' + fp(r.pct) + "</text></g>";
+  });
+  svg += "</svg></div>";
+  var wsRows = groupBy(F, function (x) { return x.ws; }).map(function (g) { var a = agg(g[1]); return { l: g[0] + " " + WSN[g[0]], v: a.simple, tip: g[0] + " " + WSN[g[0]] + " | " + g[1].length + " أنشطة · متأخر " + a.overdue + " · متوسط " + fp(a.simple) }; }).sort(function (a, b) { return b.v - a.v; });
+  var h = '<div class="ctl">' + seg("wScale", [{ v: "full", l: "المقياس 0–100%" }, { v: "zoom", l: "مقياس مكبّر" }], S.scale) + sel("wSel", "تفاصيل حزمة", [["all", "كل الحزم"]].concat(WP_LIST.map(function (w) { return [w, w + " · " + wpName(w)]; })), S.selWp) +
+    '</div><p class="hv">مرّر المؤشر على حزمة لعرض تفاصيلها، واضغط عليها لفتح الأنشطة. المربع الأحمر يعني وجود أنشطة متأخرة.</p>' + svg;
+  if (S.selWp !== "all" && T.length) {
+    var a = agg(T);
+    h += "<h3>تفاصيل الحزمة " + esc(S.selWp) + "</h3>" + props([["الحزمة", S.selWp + " · " + T[0].wpName], ["المسار", T[0].ws + " · " + WSN[T[0].ws]], ["المسؤول", T[0].resp], ["المساءلة", T[0].acct], ["النافذة", fd(minOf(T)) + " ← " + fd(maxOf(T))], ["الإنجاز", "بسيط " + fp(a.simple) + " · مرجّح " + fp(a.weighted)], ["الحالة", a.inprog + " قيد التنفيذ · " + a.notstarted + " لم يبدأ · " + a.done + " منجز · " + a.overdue + " متأخر"]]) +
+      table(["المعرّف", "النشاط", "الإنجاز", "النهاية", "المتبقي"], T.map(function (x) { return [x.id, x.en, fp(x.pct), fd(x.end), x.timing === "overdue" ? { t: leftTxt(x), cls: "tbad" } : leftTxt(x)]; }), [2, 3, 4]);
+  }
+  h += "<h3>المتوسط حسب المسار</h3>" + hbars(wsRows, 100, fp);
+  $("wpb").innerHTML = h;
+  onSeg("wScale", function (v) { S.scale = v; renderFiltered(); });
+  $("wSel").onchange = function (e) { S.selWp = e.target.value; renderFiltered(); };
+  Array.prototype.forEach.call($("wpb").querySelectorAll("[data-wp]"), function (g) { g.addEventListener("click", function () { var w = g.getAttribute("data-wp"); S.selWp = S.selWp === w ? "all" : w; renderFiltered(); }); });
+}
+
+function renderGantt(F, T) {
+  if (!F.length) { $("ganttb").innerHTML = ""; return; }
+  var rows = S.gMode === "wp" ? wpRowsOf(F).map(function (r) { return { key: r.wp, label: r.wp + " " + r.name, s: dn(r.start), e: dn(r.end), pct: r.pct, late: r.overdue > 0, info: r.info }; })
+    : T.map(function (x) { return { key: x.id, label: x.id + " " + x.en, s: dn(x.start), e: dn(x.end), pct: x.pct, late: x.timing === "overdue", info: x.id + " · " + x.en + " | " + fd(x.start) + " ← " + fd(x.end) + " | " + fp(x.pct) + " · " + x.resp }; });
+  var rh = S.gMode === "wp" ? 24 : 18, W = 1000, L = 250, top = 24, bw = W - L - 16, span = D1 - D0 + 1, H = top + rows.length * rh + 8;
+  function X(d) { return L + (d - D0) / span * bw; }
+  var svg = '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">';
+  monthTicks(D0, D1).forEach(function (t) { svg += '<line x1="' + X(t[0]) + '" x2="' + X(t[0]) + '" y1="' + (top - 4) + '" y2="' + (H - 4) + '" stroke="var(--line)"/><text x="' + (X(t[0]) + 4) + '" y="12" font-size="11" fill="var(--mut)">' + t[1] + "</text>"; });
+  rows.forEach(function (r, i) {
+    var y = top + i * rh, bh = rh - 7, x1 = X(r.s), w = Math.max(4, X(r.e + 1) - x1);
+    svg += '<g class="hot" data-gk="' + esc(r.key) + '" data-tip="' + esc(r.info) + '"><rect x="0" y="' + (y - 1) + '" width="' + W + '" height="' + (rh - 1) + '" fill="' + (S.selWp === r.key ? "var(--hi)" : "transparent") + '"/><text x="' + (L - 8) + '" y="' + (y + bh - 2) + '" text-anchor="end" font-size="11" fill="currentColor">' + esc(cut(r.label, 38)) + '</text><rect x="' + x1 + '" y="' + (y + 2) + '" width="' + w + '" height="' + bh + '" rx="3" fill="var(--track)" stroke="' + (r.late ? "var(--bad)" : "var(--line)") + '" stroke-width="' + (r.late ? 1.5 : 1) + '"/><rect x="' + x1 + '" y="' + (y + 2) + '" width="' + (r.pct > 0 ? Math.max(2, w * r.pct / 100) : 0) + '" height="' + bh + '" rx="3" fill="var(--c0)"/></g>';
+  });
+  svg += '<line x1="' + X(ASOF) + '" x2="' + X(ASOF) + '" y1="' + (top - 6) + '" y2="' + (H - 4) + '" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="' + (X(ASOF) + 4) + '" y="' + (H - 8) + '" font-size="11" fill="var(--bad)">اليوم ' + fs(META.asOf) + "</text></svg></div>";
+  $("ganttb").innerHTML = '<div class="ctl">' + seg("gMode", [{ v: "wp", l: "حسب الحزمة" }, { v: "act", l: "حسب النشاط" }], S.gMode) + '</div><p class="hv">الشريط الرمادي نافذة التنفيذ والأزرق المنجز منها، والإطار الأحمر نافذة انتهت قبل اليوم؛ الخط المتقطع تاريخ التحديث. اضغط على حزمة لفتح تفاصيلها.</p>' + svg;
+  onSeg("gMode", function (v) { S.gMode = v; renderFiltered(); });
+  Array.prototype.forEach.call($("ganttb").querySelectorAll("[data-gk]"), function (g) { g.addEventListener("click", function () { if (S.gMode !== "wp") return; var k = g.getAttribute("data-gk"); S.selWp = S.selWp === k ? "all" : k; renderFiltered(); }); });
+}
+
+function renderOwners(F) {
+  if (!F.length) { $("ownersb").innerHTML = ""; return; }
+  var rows = groupBy(F, function (x) { return S.dim === "resp" ? x.resp : x.acct; }).map(function (g) {
+    return { k: g[0], a: agg(g[1]), next: g[1].filter(function (x) { return x.status !== "done" && x.left >= 0; }).reduce(function (m, x) { return x.end < m ? x.end : m; }, "9999-99-99") };
+  }).sort(function (a, b) { return b.a.simple - a.a.simple; });
+  $("ownersb").innerHTML = '<div class="ctl">' + seg("oDim", [{ v: "resp", l: "المسؤول عن النشاط" }, { v: "acct", l: "المساءلة عن الحزمة" }], S.dim) + '</div><div class="grid g2"><div class="card"><h4>متوسط الإنجاز</h4>' +
+    hbars(rows.map(function (r) { return { l: r.k, v: r.a.simple, tip: r.k + " | " + r.a.n + " أنشطة · متأخر " + r.a.overdue + " | متوسط " + fp(r.a.simple) + " · مرجّح " + fp(r.a.weighted) }; }), 100, fp) + '</div><div class="card"><h4>توقيت الأنشطة</h4>' +
+    stacked(rows.map(function (r) { return { l: r.k, vals: [r.a.overdue, r.a.active, r.a.upcoming, r.a.done] }; }), ["متأخر", "نشط الآن", "قادم", "منجز"]) + "</div></div>" +
+    table(["الجهة", "الأنشطة", "المتوسط", "المرجّح", "متأخر", "أقرب موعد"], rows.map(function (r) { return [r.k, String(r.a.n), fp(r.a.simple), fp(r.a.weighted), r.a.overdue > 0 ? { t: String(r.a.overdue), cls: "tbad" } : "0", r.next === "9999-99-99" ? "—" : fd(r.next)]; }), [1, 2, 3, 4, 5]);
+  onSeg("oDim", function (v) { S.dim = v; renderFiltered(); });
+}
+
+function renderDept() {
+  var calc = Math.floor(nConfirmed / DEPT.length * 100), fo = IT.filter(function (x) { return x.id === "WP03.2-1"; })[0];
+  var cats = [{ v: "all", l: "كل الإدارات", n: DEPT.length }].concat(Object.keys(CAT_AR).map(function (k) { return { v: k, l: CAT_AR[k], n: DEPT.filter(function (d) { return d.cat === k; }).length }; }).filter(function (o) { return o.n > 0; }));
+  var dr = DEPT.filter(function (d) { return S.catSel === "all" || d.cat === S.catSel; });
+  var heat = DEPT.filter(function (d) { return d.scores; }), cols = ["ردّت", "أكدت المالك والبديل", "وصل حصر أو ملفات"];
+  var cw = 150, lw = 190, W = lw + cols.length * cw + 10, H = 26 + heat.length * 26;
+  var hm = '<div class="svgw"><svg style="max-width:720px" viewBox="0 0 ' + W + " " + H + '">' + cols.map(function (c, i) { return '<text x="' + (lw + i * cw + cw / 2) + '" y="14" text-anchor="middle" font-size="11" fill="var(--mut)">' + esc(c) + "</text>"; }).join("") +
+    heat.map(function (d, r) { return '<text x="' + (lw - 8) + '" y="' + (38 + r * 26) + '" text-anchor="end" font-size="12" fill="currentColor">' + esc(d.name) + "</text>" + d.scores.map(function (v, c) { return '<rect x="' + (lw + c * cw + 3) + '" y="' + (24 + r * 26) + '" width="' + (cw - 6) + '" height="22" rx="4" fill="var(--c1)" fill-opacity="' + (v === 0 ? 0.08 : 0.25 + v * 0.65) + '" stroke="var(--line)" data-tip="' + esc(d.name + " | " + cols[c] + ": " + (v === 1 ? "نعم" : v === 0.5 ? "جزئي" : "لا")) + '"/><text x="' + (lw + c * cw + cw / 2) + '" y="' + (39 + r * 26) + '" text-anchor="middle" font-size="12" fill="currentColor">' + (v === 1 ? "✓" : v === 0.5 ? "جزئي" : "—") + "</text>"; }).join(""); }).join("") + "</svg></div>";
+  var dsel = DEPT.filter(function (d) { return d.name === S.selDept; })[0] || DEPT[0];
+  $("deptb").innerHTML = "<p>" + nConfirmed + " إدارات من " + DEPT.length + " أكدت المالك والبديل كتابياً؛ الحساب " + calc + "% مقابل " + (fo ? fp(fo.pct) : "—") + " في الملف لنشاط WP03.2-1" + (fo && Math.round(fo.pct) === calc ? " (متطابق)." : " (غير متطابق، يحتاج مراجعة).") + "</p><div class='ctl'>" + seg("dCat", cats, S.catSel) + "</div>" +
+    table(["الإدارة", "المدير", "الحالة", "ما تم", "ما لم يتم"], dr.map(function (d) { return [d.name, d.mgr, { html: pill(CAT_AR[d.cat], CAT_CLS[d.cat]) }, d.did, d.miss]; })) + "<h3>جاهزية الإدارات</h3>" + hm +
+    "<h3>تفاصيل إدارة</h3><div class='ctl'>" + sel("dSel", "الإدارة", DEPT.map(function (d) { return [d.name, d.name]; }), S.selDept) + "</div>" + props([["الإدارة", dsel.name], ["المدير", dsel.mgr], ["الحالة", pill(CAT_AR[dsel.cat], CAT_CLS[dsel.cat]), 1], ["ما تم", dsel.did], ["ما لم يتم", dsel.miss]]) +
+    table(["أنشطة تعتمد على ملاك بيانات الإدارات", "الإنجاز", "النهاية"], IT.filter(function (x) { return x.acct === "CAAPP Data Owners"; }).map(function (x) { return [x.id + " · " + x.en, fp(x.pct), fd(x.end)]; }), [1, 2]);
+  onSeg("dCat", function (v) { S.catSel = v; renderDept(); });
+  $("dSel").onchange = function (e) { S.selDept = e.target.value; renderDept(); };
+}
+
+function renderFlow() {
+  var nodes = DEP_NODES.map(function (n) { var a = n.wp ? agg(IT.filter(function (x) { return x.wp === n.wp; })) : null; return { id: n.id, label: n.wp ? n.wp + " · " + n.label : n.label, detail: a ? a.n + " أنشطة · " + fp(a.simple) + (a.overdue > 0 ? " · متأخر " + a.overdue : "") : (n.detail || ""), kind: n.kind, series: n.series, pct: a ? a.simple : null }; });
+  var rank = {}; nodes.forEach(function (n) { rank[n.id] = 0; });
+  for (var it = 0; it < nodes.length; it++) DEP_EDGES.forEach(function (e) { if (rank[e.to] < rank[e.from] + 1) rank[e.to] = rank[e.from] + 1; });
+  var maxR = Math.max.apply(null, nodes.map(function (n) { return rank[n.id]; })), cols = [];
+  for (var r = 0; r <= maxR; r++) cols.push(nodes.filter(function (n) { return rank[n.id] === r; }));
+  var NW = 190, NH = 52, GX = 70, GY = 22, W = (maxR + 1) * (NW + GX), maxN = Math.max.apply(null, cols.map(function (c) { return c.length; })), H = maxN * (NH + GY) + 10, pos = {};
+  cols.forEach(function (c, ci) { var off = (maxN - c.length) * (NH + GY) / 2; c.forEach(function (n, i) { pos[n.id] = { x: W - (ci + 1) * (NW + GX) + GX, y: 5 + off + i * (NH + GY) }; }); });
+  var svg = '<div class="svgw" style="overflow:auto"><svg viewBox="0 0 ' + W + " " + H + '" style="min-width:' + Math.min(W, 1100) + 'px"><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--mut)"/></marker></defs>';
+  DEP_EDGES.forEach(function (e) {
+    var a = pos[e.from], b = pos[e.to], x1 = a.x, y1 = a.y + NH / 2, x2 = b.x + NW, y2 = b.y + NH / 2, mx = (x1 + x2) / 2;
+    svg += '<path d="M' + x1 + "," + y1 + " C" + mx + "," + y1 + " " + mx + "," + y2 + " " + x2 + "," + y2 + '" fill="none" stroke="var(--mut)" stroke-width="1.4" ' + (e.dashed ? 'stroke-dasharray="5 4"' : "") + ' marker-end="url(#ar)"/>' + (e.label ? '<text x="' + mx + '" y="' + ((y1 + y2) / 2 - 4) + '" class="rt" text-anchor="middle" font-size="10.5" fill="var(--mut)">' + esc(e.label) + "</text>" : "");
+  });
+  nodes.forEach(function (n) {
+    var p = pos[n.id], c = COL[n.series % 4];
+    svg += '<g data-tip="' + esc(n.label + (n.detail ? " | " + n.detail : "")) + '"><rect x="' + p.x + '" y="' + p.y + '" width="' + NW + '" height="' + NH + '" rx="' + (n.kind === "terminal" ? 26 : n.kind === "decision" ? 4 : 10) + '" fill="var(--card)" stroke="' + c + '" stroke-width="2" ' + (n.kind === "decision" ? 'stroke-dasharray="6 3"' : "") + '/>' + (n.pct != null ? '<rect x="' + p.x + '" y="' + (p.y + NH - 5) + '" width="' + (NW * Math.min(100, n.pct) / 100) + '" height="5" fill="' + c + '"/>' : "") +
+      '<text x="' + (p.x + NW / 2) + '" y="' + (p.y + 21) + '" class="rt" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">' + esc(cut(n.label, 30)) + '</text><text x="' + (p.x + NW / 2) + '" y="' + (p.y + 38) + '" class="rt" text-anchor="middle" font-size="11" fill="var(--mut)">' + esc(cut(n.detail, 34)) + "</text></g>";
+  });
+  $("flowb").innerHTML = '<p class="note">الخط المتصل علاقة مذكورة في ملخصات لوسي (summary_ar.md)، والمتقطع تسلسل زمني مستنتج من نوافذ الملف؛ ملف خليفة لا يحمل أعمدة اعتماد. الإطار المتقطع قرار أو مدخل خارجي، ولون الإطار يمثّل المسار (WS-03 أزرق، WS-04 وWS-05 أخضر، قرارات أصفر)، والشريط السفلي نسبة الإنجاز المحسوبة من الملف.</p>' + svg + "</svg></div>";
+}
+
+function renderTasks() {
+  var F = filtered(), T = S.selWp === "all" ? F : F.filter(function (x) { return x.wp === S.selWp; });
+  var l = T.slice();
+  if (S.sortKey === "pct") l.sort(function (a, b) { return b.pct - a.pct; });
+  else if (S.sortKey === "end") l.sort(function (a, b) { return dn(a.end) - dn(b.end); });
+  else if (S.sortKey === "id") l.sort(function (a, b) { return wpKey(a.id) < wpKey(b.id) ? -1 : 1; });
+  else if (S.sortKey === "resp") l.sort(function (a, b) { return a.resp.localeCompare(b.resp); });
+  if (S.desc) l.reverse();
+  var shown = S.limit === "all" ? l : l.slice(0, Number(S.limit)), brief = S.cols === "brief";
+  var cols = brief ? ["المعرّف", "النشاط", "المسؤول", "النهاية", "المتبقي", "الإنجاز", "الحالة", "التوقيت"] : ["المعرّف", "النشاط", "المسؤول", "النهاية", "المتبقي", "الإنجاز", "الحالة", "التوقيت", "المساءلة", "البداية", "المدة", "الوصف بالعربي"];
+  var rows = shown.map(function (x) {
+    var b = [x.id, x.en, x.resp, fd(x.end), x.left < 0 && x.status !== "done" ? { t: leftTxt(x), cls: "tbad" } : leftTxt(x), fp(x.pct), STATUS_AR[x.status], x.timing === "overdue" ? { html: pill("متأخر", "bad") } : TIMING_AR[x.timing]];
+    return brief ? b : b.concat([x.acct, fd(x.start), x.days + " يوم", x.ar]);
+  });
+  $("tasksTbl").innerHTML = table(cols, rows, [3, 4, 5, 9, 10]) + '<p class="note">يعرض ' + shown.length + " من " + T.length + " نشاطاً مصفّى (من أصل " + ALL.n + ").</p>";
+}
+function renderTasksShell() {
+  $("tasksb").innerHTML = '<div class="ctl">' + seg("tSort", [["file", "ترتيب الملف"], ["id", "المعرّف"], ["pct", "الإنجاز"], ["end", "الموعد"], ["resp", "المسؤول"]].map(function (o) { return { v: o[0], l: o[1] }; }), S.sortKey) +
+    '<button id="tDesc">ترتيب عكسي: ' + (S.desc ? "نعم" : "لا") + "</button>" + seg("tCols", [{ v: "brief", l: "عرض موجز" }, { v: "full", l: "عرض كامل" }], S.cols) + seg("tLim", [{ v: "25", l: "25 صفاً" }, { v: "50", l: "50 صفاً" }, { v: "all", l: "الكل" }], S.limit) + '</div><div id="tasksTbl"></div><h3>تفاصيل نشاط</h3><div class="ctl">' +
+    sel("tAct", "النشاط", IT.map(function (x) { return [x.id, x.id + " · " + x.en]; }), S.selAct) + '</div><div id="actDetail"></div>';
+  onSeg("tSort", function (v) { S.sortKey = v; renderTasks(); });
+  onSeg("tCols", function (v) { S.cols = v; renderTasks(); });
+  onSeg("tLim", function (v) { S.limit = v; renderTasks(); });
+  $("tDesc").onclick = function () { S.desc = !S.desc; $("tDesc").textContent = "ترتيب عكسي: " + (S.desc ? "نعم" : "لا"); renderTasks(); };
+  $("tAct").onchange = function (e) { S.selAct = e.target.value; renderAct(); };
+  renderTasks(); renderAct();
+}
+function renderAct() {
+  var a = IT.filter(function (x) { return x.id === S.selAct; })[0] || IT[0];
+  $("actDetail").innerHTML = props([["النشاط", a.id + " · " + a.en], ["الوصف بالعربي", a.ar], ["المسار والحزمة", a.ws + " · " + a.wp + " · " + a.wpName], ["المسؤول", a.resp], ["المساءلة", a.acct], ["النافذة", fd(a.start) + " ← " + fd(a.end) + " (" + a.days + " يوماً)"], ["المتبقي", leftTxt(a)], ["الإنجاز", fp(a.pct) + " · " + STATUS_AR[a.status] + " · " + TIMING_AR[a.timing]], ["المخرج المتوقع", a.outcome], ["الصف في الملف", String(a.row)]]);
+}
+
+function renderChanged() {
+  if (!changed.length) { $("changed").style.display = "none"; return; }
+  var sc = S.selChg || changed[0].id, cs = changed.filter(function (x) { return x.id === sc; })[0] || changed[0], ev = EVID[cs.id];
+  var W = 1000, L = 120, R = 50, RH = 24, H = changed.length * RH + 28, bw = W - L - R;
+  function X(v) { return L + bw * v / 100; }
+  var svg = '<div class="svgw"><svg viewBox="0 0 ' + W + " " + H + '">';
+  [0, 25, 50, 75, 100].forEach(function (t) { svg += '<line x1="' + X(t) + '" x2="' + X(t) + '" y1="0" y2="' + (H - 22) + '" stroke="var(--line)"/><text x="' + X(t) + '" y="' + (H - 6) + '" text-anchor="middle" font-size="11" fill="var(--mut)">' + t + "%</text>"; });
+  changed.forEach(function (x, i) { var y = i * RH + 12; svg += '<g data-tip="' + esc(x.id + " · " + x.en + " | قبل " + fp(BEFORE[x.id]) + " ← بعد " + fp(x.pct)) + '"><text x="' + (L - 10) + '" y="' + (y + 4) + '" text-anchor="end" font-size="12" fill="currentColor">' + x.id + '</text><line x1="' + X(BEFORE[x.id]) + '" x2="' + X(x.pct) + '" y1="' + y + '" y2="' + y + '" stroke="var(--c0)" stroke-width="3"/><circle cx="' + X(BEFORE[x.id]) + '" cy="' + y + '" r="5" fill="#8a97a8"/><circle cx="' + X(x.pct) + '" cy="' + y + '" r="6" fill="var(--c0)"/><text x="' + (X(x.pct) + 12) + '" y="' + (y + 4) + '" font-size="11" fill="var(--mut)">' + fp(x.pct) + "</text></g>"; });
+  svg += "</svg></div>";
+  var h = "<p>" + changed.length + " أنشطة تغيّرت نسبتها عن الأصل المحفوظ (11/11)؛ الدليل والقاعدة لكل نشاط من جدول التغيير الذي أعدّته لوسي 18/11.</p>" +
+    table(["المعرّف", "النشاط", "قبل", "بعد", "التغيّر"], changed.map(function (x) { return [x.id, x.en, fp(BEFORE[x.id]), fp(x.pct), { t: sg(x.pct - BEFORE[x.id]) + " نقطة", cls: "tgood" }]; }), [2, 3, 4]) + svg +
+    "<h3>الدليل والقاعدة</h3><div class='ctl'>" + sel("cSel", "النشاط", changed.map(function (x) { return [x.id, x.id + " · " + x.en]; }), cs.id) + "</div>" +
+    props([["النشاط", cs.id + " · " + cs.en], ["التغيّر", fp(BEFORE[cs.id]) + " ← " + fp(cs.pct)], ["قاعدة النسبة", ev ? ev.rule : "لا قاعدة مسجلة بعد لهذا التغيير"], ["الدليل", ev ? ev.ev : "لا دليل مسجل بعد لهذا التغيير"], ["ملاحظات", ev ? ev.note : "—"]]);
+  if (DELTA.length) h += "<h3>منذ آخر تحديث (" + esc(META.prevAt) + ")</h3>" + table(["المعرّف", "قبل", "بعد"], DELTA.map(function (d) { return [d[0], d[1] === null ? "جديد" : fp(d[1]), d[2] === null ? "حُذف" : fp(d[2])]; }), [1, 2]);
+  $("changedb").innerHTML = h;
+  $("cSel").onchange = function (e) { S.selChg = e.target.value; renderChanged(); };
+}
+
+function renderRisks() {
+  var late = IT.filter(function (x) { return x.timing === "overdue"; }), lateWps = uniq(late.map(function (x) { return x.wp; })), sz = IT.filter(function (x) { return x.resp === "Sufyan" && x.pct === 0; }).length;
+  var soon = IT.filter(function (x) { return x.status !== "done" && x.left >= 0 && x.left <= 3; });
+  var rr = [
+    ["مرتفعة", late.length + " أنشطة تجاوزت نهاية نافذتها", "الحزم: " + lateWps.join("، ") + "؛ لم يكتمل أيٌّ منها", "ملف خليفة (محسوب)"],
+    ["مرتفعة", nNone + " إدارات لم تردّ، والمشتريات " + (nNotSent > 0 ? "لم يُرسل لها الطلب" : "أُرسل لها الطلب"), "الموعد العملي للتأكيد الخميس 19/11؛ نافذة WP03.1 تنتهي السبت 21/11", "بطاقة الإدارات"],
+    ["مرتفعة", soon.length + " نشاطاً تنتهي خلال 3 أيام", "نسبة إنجازها الحالية " + fp(agg(soon).simple), "ملف خليفة (محسوب)"],
+    ["متوسطة", sz + " نشاطاً لسفيان في WS-01 بلا أي إنجاز مسجّل", "الحالة غير معروفة: لا دليل في الملفات وليس بالضرورة غير منجز", "ملف خليفة وsummary_ar.md"]
+  ].concat(RISKS.map(function (r) { return [r.sev === "high" ? "مرتفعة" : r.sev === "med" ? "متوسطة" : "منخفضة", r.title, r.detail, r.source]; }));
+  $("risksb").innerHTML = table(["الخطورة", "الخطر", "التفاصيل", "المصدر"], rr.map(function (r) { return [{ html: pill(r[0], r[0] === "مرتفعة" ? "bad" : r[0] === "متوسطة" ? "warn" : "neutral") }, r[1], r[2], r[3]]; }));
+}
+
+function renderDecisions() {
+  var w42 = IT.filter(function (x) { return x.id === "WP04.2-1"; })[0];
+  var sc = w42 ? [80, 20, 0].map(function (v) { return { v: v, s: ALL.simple + (v - w42.pct) / IT.length, w: ALL.weighted + w42.days * (v - w42.pct) / totDays }; }) : [];
+  function item(d, st) { return '<div class="dec"><div class="id">' + esc(d.id || "•") + '</div><div><div class="t">' + esc(d.title) + "</div><div>" + esc(d.detail) + '</div><div class="m">المصدر: ' + esc(d.source) + "</div></div><div>" + pill(st, "warn") + "</div></div>"; }
+  $("decisionsb").innerHTML = DECISIONS.map(function (d) { return item(d, "بانتظار قرار أحمد"); }).join("") +
+    (sc.length ? "<h3>أثر القرار على المتوسطات</h3>" + table(["سيناريو WP04.2-1", "نسبة النشاط", "المتوسط البسيط", "المتوسط المرجّح"], sc.map(function (s) { return [s.v === 80 ? "قبول 80% (تقدير لوسي)" : s.v === 20 ? "معاملته كمسودة (20%)" : "عدم احتسابه (0%)", fp(s.v), fp(s.s), fp(s.w)]; }), [1, 2, 3]) + '<p class="note">جدول السيناريوهات حساب لأثر القرار على المتوسطات وليس تقديراً للإنجاز.</p>' : "") +
+    "<h3>مدخلات أخرى مفتوحة</h3>" + OTHER.map(function (d) { return item(d, "مفتوح"); }).join("");
+}
+function renderDq() { $("dqb").innerHTML = '<ul class="dq">' + DQ.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>"; }
+function renderSrc() {
+  var hl = HIST[HIST.length - 1];
+  $("srcb").innerHTML = props([["آخر تحديث من المصدر", META.generatedAt + " (توقيت الرياض)"], ["آخر تعديل للملف المصدر", META.sourceModified + " (توقيت الرياض)"], ["الملف المصدر", META.sourceName], ["المسار في OneDrive", META.oneDrivePath], ["بصمة الملف (MD5)", META.md5], ["تاريخ الاحتساب", fd(META.asOf)], ["تغييرات منذ آخر تحديث", META.changedSince + (META.prevAt ? " (منذ " + META.prevAt + ")" : "")], ["آخر نقطة في السجل", hl.label + " · بسيط " + fp(hl.simple) + " · مرجّح " + fp(hl.weighted)], ["آلية التحديث", "تنزيل الملف من OneDrive ثم إعادة احتساب كل المؤشرات ومقارنتها بآخر لقطة ونشر data.json في هذا الموقع"]]);
+}
+
+function renderFiltered() {
+  var F = filtered(), T = S.selWp === "all" ? F : F.filter(function (x) { return x.wp === S.selWp; }), a = agg(F);
+  $("fCount").textContent = F.length ? "يعرض " + F.length + " من " + ALL.n + " نشاطاً · المتوسط البسيط " + fp(a.simple) + " · المرجّح " + fp(a.weighted) + " · متأخر " + a.overdue : "لا نتائج مطابقة؛ اضغط إعادة الضبط.";
+  renderWp(F, T); renderGantt(F, T); renderOwners(F); renderTasks();
+}
+
+renderSum(); renderDates(); renderFilters(); renderDept(); renderFlow(); renderTasksShell(); renderChanged(); renderRisks(); renderDecisions(); renderDq(); renderSrc(); renderFiltered();
+})();
+</script>
+</body>
+</html>

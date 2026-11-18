@@ -1,2 +1,3 @@
-# caapp-netsuite-dashboard
-Static executive dashboard (Arabic RTL) - NetSuite stabilization
+# لوحة قيادة تثبيت استقرار NetSuite — CAAPP
+
+صفحة ثابتة (index.html) تقرأ data.json. لا تحتوي أسراراً ولا بيانات اتصال. تُحدَّث data.json آلياً من ملف قائمة الأنشطة.
